@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-glow: #3b82f6;
+  --color-brand-purple: #8b5cf6;
+  --color-glass-border: rgba(255, 255, 255, 0.1);
+  --color-glass-bg: rgba(17, 17, 17, 0.7);
+
+  --animate-shimmer: shimmer 2s linear infinite;
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+  @keyframes shimmer {
+    from {
+      background-position: -200% 0;
+    }
+
+    to {
+      background-position: 200% 0;
+    }
+  }
+}
+
+:root {
+  --background: #050505;
+  --foreground: #fafafa;
+  --card: #111111;
+  --card-foreground: #fafafa;
+  --border: #27272a;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Ambient Background Glows */
+body::before {
+  content: "";
+  position: fixed;
+  top: -10%;
+  left: -10%;
+  width: 40%;
+  height: 40%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  bottom: -10%;
+  right: -10%;
+  width: 40%;
+  height: 40%;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-black/40 backdrop-blur-xl border border-white/10;
+  }
+
+  .glass-card {
+    @apply bg-zinc-900/50 backdrop-blur-md border border-white/5 shadow-2xl;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+  }
+}
