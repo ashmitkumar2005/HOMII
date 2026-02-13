@@ -8,6 +8,7 @@ import ThinkingState from "@/components/ui/ThinkingState";
 import SuggestionChips from "@/components/ui/SuggestionChips";
 import GlassContainer from "@/components/ui/GlassContainer";
 import MobileView from "@/components/mobile/MobileView";
+import AuthView from "@/components/auth/AuthView";
 import { Sparkles } from "lucide-react";
 
 interface Message {
@@ -27,6 +28,7 @@ const INITIAL_MESSAGES: Message[] = [
 export default function Home() {
   const [messages, setMessages] = React.useState<Message[]>(INITIAL_MESSAGES);
   const [isThinking, setIsThinking] = React.useState(false);
+  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
   const scrollRef = React.useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -57,6 +59,10 @@ export default function Home() {
       setIsThinking(false);
     }, 2000);
   };
+
+  if (!isAuthenticated) {
+    return <AuthView onLogin={() => setIsAuthenticated(true)} />;
+  }
 
   return (
     <>
